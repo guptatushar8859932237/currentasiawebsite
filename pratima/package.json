@@ -1,0 +1,63 @@
+{
+  "name": "asiadirect",
+  "version": "0.1.0",
+  "private": true,
+  "homepage": "https://ship.asiadirect.africa/",
+  "dependencies": {
+    "@emotion/react": "^11.11.4",
+    "@emotion/styled": "^11.11.5",
+    "@material-ui/icons": "^4.11.3",
+    "@mui/icons-material": "^5.16.14",
+    "@mui/lab": "^5.0.0-alpha.170",
+    "@mui/material": "^5.15.17",
+    "@testing-library/jest-dom": "^5.17.0",
+    "@testing-library/react": "^13.4.0",
+    "@testing-library/user-event": "^13.5.0",
+    "aos": "^2.3.4",
+    "axios": "^1.6.7",
+    "or": "^0.2.0",
+    "react": "^18.2.0",
+    "react-animations": "^1.0.0",
+    "react-barcode": "^1.5.3",
+    "react-bootstrap": "^2.10.2",
+    "react-dom": "^18.2.0",
+    "react-flickity-component": "^4.0.7",
+    "react-router-dom": "^6.22.0",
+    "react-scripts": "5.0.1",
+    "react-slick": "^0.30.1",
+    "react-spring": "^9.7.3",
+    "react-to-pdf": "^1.0.1",
+    "react-toastify": "^10.0.4",
+    "react-vertical-timeline-component": "^3.6.0",
+    "slick-carousel": "^1.8.1",
+    "sweetalert2": "^11.10.5",
+    "web-vitals": "^2.1.4"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "@types/react-slick": "^0.23.13"
+  }
+}
