@@ -65,9 +65,9 @@ export default function ClearanceOrder() {
         <div className="container-fluid">
           <div className="row">
             <div className="col-md-12">
-              <div className="d-flex justify-content-between align-items-center my-3 flex-wrap fretDeatilBtn ">
+              <div className="d-flex justify-content-between align-items-center my-3 flex-wrap">
                 <div>
-                  <h4 className="para_det">Order clearance</h4>
+                  <h4 className="para_det me-4">Order clearance</h4>
                 </div>
                 <div>
                   <input
