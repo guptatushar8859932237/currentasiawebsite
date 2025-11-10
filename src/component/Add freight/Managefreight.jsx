@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+ import React, { useEffect, useState } from "react";
 import Arrow from "../../assestss/Group 2.png";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
@@ -1591,7 +1591,7 @@ export default function Managefreight() {
             top: "50%",
             left: "50%",
             transform: "translate(-50%, -50%)",
-            width: 750,
+              width: { xs: "90%", sm: 600, md: 750 }, 
             bgcolor: "background.paper",
             boxShadow: 24,
             borderRadius: "5px",
@@ -1611,7 +1611,7 @@ export default function Managefreight() {
                 <div className="borderShip mt-0">
                   <h3 className="mb-3">Freight Details</h3>
                   <div className="row">
-                    <div className="col-lg-6">
+                    <div className="col-lg-6  mb-3 mb-lg-0">
                       <h5 className="labelTitle">Freight Type</h5>
                       <select
                         name="freight"
@@ -1747,7 +1747,7 @@ export default function Managefreight() {
                       <p className="text-danger mb-0"></p>
                     </div>
                     <div className="col-lg-6">
-                      <h5 className="labelTitle">Destination</h5>
+                      <h5 className="labelTitle top10M">Destination</h5>
                       <div className="parentShipper">
                         <div className="childshipper">
                           <div className="d-flex">
@@ -2082,12 +2082,12 @@ export default function Managefreight() {
                     </div>
                   </div>
                 </div>
-                <div className="row mb-3 mt-4">
-                  <div className="col-8 mt-3">
+                <div className="d-flex justify-content-between flex-wrap gap-3 mt-4">
+                  <div>
                     <h4 className="freight_hd">Document Section</h4>
                     <span class="line"></span>
                   </div>
-                  <div className="col-4">
+                  <div>
                     <button className="btn btn_add_web" onClick={handleShow}>
                       Upload Documents
                     </button>
@@ -2216,7 +2216,7 @@ export default function Managefreight() {
                         />
                       </div>
                     </div>
-                    <div className="col-lg-6 ">
+                    <div className="col-lg-6 mt-3 mt-lg-0">
                       <h5 className="labelTitle">Nature of Goods</h5>
                       <select
                         name="nature_of_goods"
@@ -2431,7 +2431,7 @@ export default function Managefreight() {
             top: "50%",
             left: "50%",
             transform: "translate(-50%, -50%)",
-            width: 750,
+           width: { xs: "90%", sm: 600, md: 750 }, 
             bgcolor: "background.paper",
             boxShadow: 24,
             borderRadius: "5px",
@@ -2446,8 +2446,8 @@ export default function Managefreight() {
             </div>
           </div>
           <div className="frightFormSec manageModal">
-            <div className="row d-flex mb-3">
-              <div className="col-6">
+            <div className="row d-flex">
+              <div className="col-md-6 col-sm-6 mb-3">
                 <h5 className="labelTitle">Collection from</h5>
                 <select
                   className="py-2 w-100"
@@ -2462,7 +2462,7 @@ export default function Managefreight() {
                   ))}
                 </select>
               </div>
-              <div className="col-6">
+              <div className="col-md-6 col-sm-6 mb-3">
                 <h5 className="labelTitle">Destination</h5>
                 <select
                   className="py-2 w-100"
@@ -2478,8 +2478,8 @@ export default function Managefreight() {
                 </select>
               </div>
             </div>
-            <div className="row d-flex mb-3">
-              <div className="col-6 ">
+            <div className="row d-flex">
+              <div className="col-md-6 col-sm-6 mb-3">
                 <h5 className="labelTitle">Start Date</h5>
                 <input
                   className="py-2 w-100"
@@ -2488,7 +2488,7 @@ export default function Managefreight() {
                   onChange={handechangefilter}
                 ></input>
               </div>
-              <div className="col-6 ">
+              <div className="col-md-6 col-sm-6 mb-3">
                 <h5 className="labelTitle">End Date</h5>
                 <input
                   className="py-2 w-100"
@@ -2498,8 +2498,8 @@ export default function Managefreight() {
                 ></input>
               </div>
             </div>
-            <div className="row d-flex mb-3">
-              <div className="col-6">
+            <div className="row d-flex ">
+              <div className="col-md-6 col-sm-6 mb-3">
                 <h5 className="labelTitle">Freight</h5>
                 <select
                   className="py-2 w-100"
@@ -2512,7 +2512,7 @@ export default function Managefreight() {
                   <option value="Sea">Sea</option>
                 </select>
               </div>
-              <div className="col-6">
+              <div className="col-md-6 col-sm-6 mb-3">
                 <h5 className="labelTitle">Freight Type</h5>
                 <select
                   className="py-2 w-100"

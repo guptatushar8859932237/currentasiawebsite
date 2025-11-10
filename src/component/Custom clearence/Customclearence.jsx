@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
@@ -347,14 +347,14 @@ export default function Customclearence() {
                 {data.length == 0 ? (
                   <div></div>
                 ) : (
-                  <div className="d-flex justify-content-between align-items-center">
+                  <div className="d-flex justify-content-between align-items-center flex-wrap my-3">
                     <div className="">
-                      <h4 className="para_det">Clearance Details</h4>
+                      <h4 className="para_det me-4">Clearance Details</h4>
                     </div>
-                    <div className="d-flex justify-content-end align-items-center">
+                    <div className="d-flex justify-content-end align-items-center flex-wrap fretDeatilBtn">
                       <div>
                         <input
-                          className="my-3 py-1 px-2 mx-2 rounded customSearch"
+                          className="py-1 px-2 rounded customSearch"
                           value={searchQuery}
                           onChange={handleSearch}
                           placeholder="Search"
@@ -1006,7 +1006,7 @@ export default function Customclearence() {
                                         />
                                       </div> */}
 
-                                      <div className="d-flex justify-content-between mb-3 mt-4">
+                                      <div className="d-flex justify-content-between flex-wrap gap-3 mt-4">
                                         <div className="">
                                           <h4 className="freight_hd">
                                             Document Section

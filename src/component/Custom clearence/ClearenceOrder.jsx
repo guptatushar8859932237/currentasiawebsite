@@ -65,13 +65,13 @@ export default function ClearanceOrder() {
         <div className="container-fluid">
           <div className="row">
             <div className="col-md-12">
-              <div className="d-flex justify-content-between align-items-center">
+              <div className="d-flex justify-content-between align-items-center my-3 flex-wrap fretDeatilBtn ">
                 <div>
                   <h4 className="para_det">Order clearance</h4>
                 </div>
                 <div>
                   <input
-                    className="my-3 py-1 px-2 mx-2 rounded customSearch"
+                    className=" py-1 px-2 rounded customSearch"
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
                     placeholder="Search"

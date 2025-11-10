@@ -1,4 +1,4 @@
-// import React, { useEffect, useState } from "react";
+ // import React, { useEffect, useState } from "react";
 // import axios from "axios";
 // import { Link, useNavigate } from "react-router-dom";
 // import SidebarWeb from "../homepage/SidebarwWeb";
@@ -1267,14 +1267,14 @@ export default function OrderDetails() {
                 ) : (
                   <>
                     <div className="tableManageFright">
-                      <div className="d-flex justify-content-between align-items-center">
+                      <div className="d-flex justify-content-between flex-wrap  my-3 align-items-center ">
                         <div>
-                          <h4 className="para_det">Order Details</h4>
+                          <h4 className="para_det me-4">Order Details</h4>
                         </div>
-                        <div className="d-flex">
+                        <div className="d-flex fretDeatilBtn">
                           <div>
                             <input
-                              className="my-3 mx-2 py-1 px-2 rounded"
+                              className=" py-1 px-2 rounded"
                               value={searchQuery}
                               onChange={handleSearch}
                               placeholder="Search"
@@ -1283,7 +1283,7 @@ export default function OrderDetails() {
                           <div>
                             <button
                               onClick={openmodalopen}
-                              className=" my-3  py-2  add_button mx-2"
+                              className="py-2  add_button"
                             >
                               Filter
                             </button>
@@ -2137,7 +2137,7 @@ export default function OrderDetails() {
               top: "50%",
               left: "50%",
               transform: "translate(-50%, -50%)",
-              width: 750,
+            width: { xs: "90%", sm: 600, md: 750 }, 
               bgcolor: "background.paper",
               boxShadow: 24,
               borderRadius:"5px"
