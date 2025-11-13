@@ -2,19 +2,13 @@ import React from "react";
 import Slider from "react-slick";
 import image1 from "../../assestss/client1.png";
 
-import image2 from "../../assestss/client2.png";
-import image3 from "../../assestss/client-logo_05.png";
-import image4 from "../../assestss/client-logo4.png";
-import image5 from "../../assestss/client5.png";
-import image6 from "../../assestss/logo1new.png";
-import image7 from "../../assestss/logo_2.png";
-import image8 from "../../assestss/logo_3.png";
-import image9 from "../../assestss/logo_4.png";
-import image10 from "../../assestss/logo_5.png";
-import image11 from "../../assestss/logo_6.png";
-
-// import image5 from '../../assestss/client5.png'
-// import image5 from '../../assestss/client5.png'
+import image2 from "../../assestss/GLENCORE.png";
+import image3 from "../../assestss/Health.png";
+import image4 from "../../assestss/SHANTU.png";
+import image5 from "../../assestss/SULZER.png";
+import image6 from "../../assestss/SUPRAHEALTH.png";
+import image7 from "../../assestss/TGOOD.png";
+import image8 from "../../assestss/TOPTECH.png";
 export default function WhyWesafe() {
   var settings = {
     dots: false,
@@ -104,21 +98,6 @@ export default function WhyWesafe() {
                   <div>
                     <div className="LogoOpacity">
                       <img src={image8} alt="hellow" />
-                    </div>
-                  </div>
-                  <div>
-                    <div className="LogoOpacity">
-                      <img src={image9} alt="hellow" />
-                    </div>
-                  </div>
-                  <div>
-                    <div className="LogoOpacity">
-                      <img src={image10} alt="hellow" />
-                    </div>
-                  </div>
-                  <div>
-                    <div className="LogoOpacity">
-                      <img src={image11} alt="hellow" />
                     </div>
                   </div>
                 </Slider>
