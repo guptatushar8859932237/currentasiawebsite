@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+ import React, { useEffect, useState } from "react";
 import image1 from "../../assestss/logo.png";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -84,12 +84,15 @@ export default function Navbar() {
   };
   //
   const [sidebar, setSidebar] = useState(false);
-  const showSide = () => {
-    setSidebar(true);
-  };
-  const hideSide = () => {
-    setSidebar(false);
-  };
+const showSide = () => {
+  setSidebar(true);
+  document.body.classList.add("no-scroll"); // stop page scroll
+};
+
+const hideSide = () => {
+  setSidebar(false);
+  document.body.classList.remove("no-scroll"); // re-enable page scroll
+};
   return (
     <div>
       <nav className="navbar navbar-expand-lg bg-body-tertiary dash_nav orderDetalDrop">
@@ -223,13 +226,15 @@ export default function Navbar() {
                 </li>
               </ul>
             </div>
-            <div className="mobileSide ms-2" onClick={showSide}>
+            <div className="mobileSide" onClick={showSide}>
               <i className="fi fi-br-menu-burger navbar-toggler-icon"></i>
             </div>
             {/* {sidebar && ( */}
               <div className={`openSide ${sidebar?"active":""}`}>
                 <div className="opeSideCon">
-                  <i onClick={hideSide}>&times;</i>
+                 <div className="timesSide">
+ <i onClick={hideSide}>&times;</i>
+                 </div>
                   <ul>
                     <li className="sidebar-item">
                       <p

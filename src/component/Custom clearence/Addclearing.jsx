@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Topbar from "../Topbar";
 import Navbar from "../homepage/Navbar";
@@ -614,12 +614,12 @@ export default function Addclearing() {
                     </div>
                   </div>
                 </div>
-                <div className="row mb-3 mt-4">
-                  <div className="col-9 mt-3">
+                 <div className="d-flex justify-content-between flex-wrap gap-3 mt-4">
+                  <div>
                     <h4 className="freight_hd">Document Section</h4>
                     <span class="line"></span>
                   </div>
-                  <div className="col-3">
+                  <div>
                     <button
                       className="btn btn_add_web
                                                                       "

@@ -1,4 +1,4 @@
-@import "slick-carousel/slick/slick.css";
+ @import "slick-carousel/slick/slick.css";
 @import "slick-carousel/slick/slick-theme.css";
 @import "react-toastify/dist/ReactToastify.css";
 
@@ -5349,7 +5349,7 @@ li.sidebar-item:hover i {
 }
 .footerAsiaFront {
   width: calc(100% - 251px);
-  z-index: 9999999;
+  z-index: 99;
   position: relative;
   margin-left: auto;
   padding: 15px 0px;
@@ -5525,9 +5525,11 @@ button.circlePlus {
   background-color: #fff;
   border-radius: 0px 0px 10px 10px;
 }
+
+/* mobile slide show */
 .openSide {
   position: fixed;
-  z-index: 99999;
+  z-index: 9999999;
   top: 0px;
   background: var(--blue);
   right: 0px;
@@ -5548,10 +5550,37 @@ button.circlePlus {
 .mobileSide {
   display: none;
 }
-.fretDeatilBtn{
+.fretDeatilBtn {
   gap: 10px;
 }
-/* mobile responsive  start*/
+.mobileSide i {
+  font-size: 22px !important;
+}
+.timesSide i {
+  text-align: right;
+  color: var(--maroon) !important;
+  font-size: 30px;
+  cursor: pointer;
+}
+.timesSide {
+  text-align: right;
+  padding-right: 10px;
+}
+.openSide .hide-menu {
+  color: #fff;
+  font-size: 15px;
+}
+.opeSideCon ul {
+  padding-left: 10px;
+}
+.opeSideCon .sidebar-item i {
+  margin-right: 10px;
+  font-size: 16px;
+}
+body.no-scroll {
+  overflow: hidden;
+}
+/* pp mobile responsive  start*/
 @media (min-width: 768px) and (max-width: 1199px) {
   .headNav {
     padding: 5px 10px;
@@ -5576,6 +5605,9 @@ button.circlePlus {
 
 /* freight order  */
 @media (min-width: 768px) and (max-width: 1082px) {
+  .footerAsiaFront {
+    width: calc(100% - 50px);
+  }
   .left-sidebar {
     width: 50px;
   }
@@ -5636,14 +5668,14 @@ button.circlePlus {
     font-size: 18px;
   }
   .navbar-brand img {
-    height: 50px;
+    height: 50px !important;
   }
   .checkOffers li {
     display: flex;
   }
   .manageFrightSec {
     padding-left: 0px;
-    padding-top: 55px;
+    padding-top: 70px;
   }
   .para_det {
     margin-bottom: 10px;
@@ -5655,11 +5687,27 @@ button.circlePlus {
     padding-left: 0px;
     padding-right: 0px;
   }
-  .fretDeatilBtn{
+  .fretDeatilBtn {
     justify-content: start !important;
   }
- 
-  .mobileSide i {
-      font-size: 25px !important;
+  .footerAsiaFront {
+    width: 100%;
   }
+  .pro_para {
+    display: none;
+  }
+  .orderDetalDrop .bell_icon.mx-4 {
+    margin-left: 10px !important;
+    margin-right: 10px !important;
+  }
+  .orderDetalDrop .pro_img {
+    height: 26px;
+    width: 26px;
+  }
+  .orderDetalDrop .noti_icon {
+    font-size: 16px;
+  }
+  h4.freight_hd {
+    font-size: 20px;
+}
 }
