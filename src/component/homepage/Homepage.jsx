@@ -11,7 +11,6 @@ import WhyWesafe from './WhyWesafe'
 import Oursuppluchain from './Oursuppluchain'
 import Footer from './Footer'
 import Whatssapicon from './Whatssapicon'
-
 export default function Homepage() {
 
   const handletop = () => {

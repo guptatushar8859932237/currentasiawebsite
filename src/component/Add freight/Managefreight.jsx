@@ -1,4 +1,4 @@
- import React, { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import Arrow from "../../assestss/Group 2.png";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
@@ -50,15 +50,11 @@ export default function Managefreight() {
   const [country, setCountry] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
   const [showModal, setShowModal] = useState(false);
-  const [formData, setFormData] = useState(null);
-  const [formData1, setFormData1] = useState(null);
   const [formData2, setFormData2] = useState(null);
-  const [formData3, setFormData3] = useState(null);
   const [formData5, setFormData5] = useState(false);
   const navigate = useNavigate();
   const [show1, setShow1] = useState(false);
   const [selectedDocs, setSelectedDocs] = useState([]);
-
   const docOptions = [
     { id: "Customs Documents", label: "Customs docs" },
     { id: "Supporting Documents", label: "Supporting docs" },
@@ -70,31 +66,22 @@ export default function Managefreight() {
     { id: "AD_Quotations", label: "Attach Quote" },
     { id: "Supplier Invoices", label: "Supplier Invoices" },
   ];
-
   const handleShow = () => setShow1(true);
   const handleClose = () => setShow1(false);
-
-  // Handle dropdown change
   const handleSelect = (e) => {
     const selected = e.target.value;
     if (selected && !selectedDocs.find((doc) => doc.name === selected)) {
       setSelectedDocs([...selectedDocs, { name: selected, files: [] }]);
     }
   };
-
-  // Handle file upload for each document type
   const handleFileChangefil = (e, docName) => {
     const files = Array.from(e.target.files);
     setSelectedDocs((prev) =>
       prev.map((doc) => (doc.name === docName ? { ...doc, files } : doc))
     );
   };
-
-  // For saving data (you can send to API)
   const handleSave = () => {
     console.log("Uploaded Documents:", selectedDocs);
-
-    // To see filenames instead of [object Object]
     selectedDocs.forEach((doc) => {
       console.log("Doc Type:", doc);
       doc.files.forEach((file) => {
@@ -104,7 +91,6 @@ export default function Managefreight() {
 
     handleClose();
   };
-
   useEffect(() => {
     window.scrollTo(0, 0);
     getdata();
@@ -132,6 +118,7 @@ export default function Managefreight() {
         user_id: currentuser?.id,
       })
       .then((response) => {
+        console.log(response.data.data);
         setData(response.data.data);
       })
       .catch((error) => {
@@ -175,8 +162,6 @@ export default function Managefreight() {
     });
     const reguser = userdata[0];
     console.log(reguser);
-    // console.log(reguser.collection_from);
-    // console.log(reguser.delivery_to);
     setInputData((prevData) => ({
       ...prevData,
       shipment_ref: reguser.shipment_ref,
@@ -305,7 +290,6 @@ export default function Managefreight() {
     formdata.append("assign_to_clearing", clearings);
     selectedDocs.forEach((doc) => {
       console.log("Doc Type:", doc.name);
-
       doc.files.forEach((file) => {
         formdata.append(doc.name, file); // 👈 each file append
         console.log("File:", file.name, "| Size:", file.size, "bytes");
@@ -316,7 +300,6 @@ export default function Managefreight() {
         formdata.append("document", formData2.licenses[i]);
       }
     }
-
     console.log(formdata);
     axios
       .post(`${process.env.REACT_APP_BASE_URL}update-freights`, formdata)
@@ -434,7 +417,7 @@ export default function Managefreight() {
     const { name, value } = e.target;
     setInputData({ ...inputData, [name]: value });
   };
-  const totaldimension = inputData.dimension * inputData.weight;
+  const totaldimension = 167 * inputData.weight;
   const handleNavigate = () => {
     navigate("/addfreight");
   };
@@ -444,44 +427,25 @@ export default function Managefreight() {
       setFiles(file);
     }
   };
-  const handleFileChange4 = (event) => {
-    const files = event.target.files;
-    setFormData({ ...formData, supplier_invoice: files });
-  };
-  const handleFileChange1 = (event) => {
-    const files = event.target.files;
-    setFormData1({ ...formData1, packing_list: files });
-  };
   const handleFileChange2 = (event) => {
     const files = event.target.files;
     setFormData2({ ...formData2, licenses: files });
   };
-  const handleFileChange3 = (event) => {
-    const files = event.target.files;
-    setFormData3({ ...formData3, other_documents: files });
-  };
-
   const handechangefilter = (e) => {
     const { name, value } = e.target;
     setInputvali({ ...inputvali, [name]: value });
   };
-
   const postapi = () => {
-    // convert to Date objects
     const start = new Date(inputvali.startDate);
     const end = new Date(inputvali.endDate);
-
-    // validation
     if (!inputvali.startDate || !inputvali.endDate) {
       toast.error("Please select both Start Date and End Date.");
       return;
     }
-
     if (start >= end) {
       toast.error("Start Date must be smaller than End Date.");
       return;
     }
-
     const datapost = {
       user_id: clienduidi.id,
       origin: inputvali.origin,
@@ -491,9 +455,7 @@ export default function Managefreight() {
       freightType: inputvali.freight,
       freightSpeed: inputvali.type,
     };
-
     console.log(datapost);
-
     axios
       .post(`${process.env.REACT_APP_BASE_URL}client-freights`, datapost)
       .then((response) => {
@@ -508,7 +470,11 @@ export default function Managefreight() {
         console.log(error.response?.data || error.message);
       });
   };
-
+  const handleChat = (item) => {
+    console.log(item);
+    console.log("item", item);
+    navigate("/QuotationInFreight", { state: { data: item } });
+  };
   return (
     <div>
       <>
@@ -755,6 +721,22 @@ export default function Managefreight() {
                                                     Delete
                                                   </p>
                                                 </div>
+                                                {item.staff_name ? (
+                                                  <div className="drpIcons dropdown-item item_drop">
+                                                    <p
+                                                      className="link_bdy mb-0"
+                                                      onClick={() => {
+                                                        handleChat(item);
+                                                      }}
+                                                    >
+                                                      <i className="fa-solid fa-message icon_align" />
+                                                      Chat
+                                                    </p>
+                                                  </div>
+                                                ) : (
+                                                  <p></p>
+                                                )}
+
                                                 {item.status === "2" ? (
                                                   <p></p>
                                                 ) : (
@@ -772,6 +754,9 @@ export default function Managefreight() {
                                             </div>
                                           </div>
                                         </div>
+                                        <p className="link_bdy mb-0">
+                                          {item?.assigned_supplier_name}
+                                        </p>
                                       </td>
                                     </tr>
                                   );
@@ -1099,17 +1084,6 @@ export default function Managefreight() {
                       <div className="borderShip">
                         <h3 className="mb-4">Your Shipment reference</h3>
                         <div className="row">
-                          {/* <div className="col-lg-6">
-                            <h5 className="labelTitle">
-                              Your Customer Reference
-                            </h5>
-                            <input
-                              type="text"
-                              onChange={handklechangeas}
-                              name="shipment_ref"
-                              value={inputData.shipment_ref}
-                            />
-                          </div> */}
                           <div className="col-lg-6 shipRefer">
                             <h5 className="labelTitle">Are you the</h5>
                             <div className="mt-3">
@@ -1510,10 +1484,11 @@ export default function Managefreight() {
                             />
                           </div>
                           <div className="col-lg-6 mt-3">
-                            <h5 className="labelTitle">Auto Calculate</h5>
+                            <h5 className="labelTitle">Volumetric Weight</h5>
                             <input
                               type="text"
                               name="autoCalculate"
+                              disabled
                               onChange={handleInputChange}
                               value={totaldimension}
                             />
@@ -1591,7 +1566,7 @@ export default function Managefreight() {
             top: "50%",
             left: "50%",
             transform: "translate(-50%, -50%)",
-              width: { xs: "90%", sm: 600, md: 750 }, 
+            width: { xs: "90%", sm: 600, md: 750 },
             bgcolor: "background.paper",
             boxShadow: 24,
             borderRadius: "5px",
@@ -1853,15 +1828,6 @@ export default function Managefreight() {
                 <div className="borderShip">
                   <h3 className="mb-3">Your Shipment reference</h3>
                   <div className="row">
-                    {/* <div className="col-lg-6">
-                      <h5 className="labelTitle">Your Customer Reference</h5>
-                      <input
-                        type="text"
-                        onChange={handklechangeas}
-                        name="shipment_ref"
-                        value={inputData.shipment_ref}
-                      />
-                    </div> */}
                     <div className="col-lg-6 ">
                       <h5 className="labelTitle">Are you the</h5>
                       <div className="mt-2 shipRefer d-flex align-items-center">
@@ -2091,7 +2057,6 @@ export default function Managefreight() {
                     <button className="btn btn_add_web" onClick={handleShow}>
                       Upload Documents
                     </button>
-
                     {show1 && (
                       <Modal
                         open={show1}
@@ -2116,14 +2081,11 @@ export default function Managefreight() {
                               "linear-gradient(135deg, #e3f2fd, #ffffff)", // gradient background
                           }}
                         >
-                          {/* Title */}
                           <h2
                             style={{ marginBottom: "20px", color: "#1976d2" }}
                           >
                             📂 Upload Documents
                           </h2>
-
-                          {/* Dropdown */}
                           <FormControl fullWidth sx={{ mt: 2 }}>
                             <InputLabel id="doc-select-label">
                               Select Document Type
@@ -2140,8 +2102,6 @@ export default function Managefreight() {
                               ))}
                             </Select>
                           </FormControl>
-
-                          {/* Dynamic file inputs */}
                           <div className="mt-3">
                             {selectedDocs.map((doc, index) => (
                               <div
@@ -2162,8 +2122,6 @@ export default function Managefreight() {
                               </div>
                             ))}
                           </div>
-
-                          {/* Footer buttons */}
                           <Box
                             sx={{
                               display: "flex",
@@ -2249,7 +2207,6 @@ export default function Managefreight() {
                     </div>
                     <div className="col-lg-6 mt-3">
                       <h5 className="labelTitle">Commodity</h5>
-
                       <select
                         name="commodity"
                         onChange={handleInputChange}
@@ -2261,7 +2218,6 @@ export default function Managefreight() {
                         {apidata &&
                           apidata.length > 0 &&
                           apidata.map((item, index) => {
-                            console.log(item);
                             return (
                               <>
                                 <option key={index} value={item.id}>
@@ -2295,7 +2251,6 @@ export default function Managefreight() {
                         <select
                           className="form-select"
                           name="dimension_unit"
-                          // value={dimension_unit || ""}
                           onChange={handleInputChange}
                         >
                           <option value="">Unit</option>
@@ -2318,7 +2273,6 @@ export default function Managefreight() {
                         <select
                           className="form-select"
                           name="weight_unit"
-                          // value={weight_unit || ""}
                           onChange={handleInputChange}
                         >
                           <option value="">Unit</option>
@@ -2381,22 +2335,11 @@ export default function Managefreight() {
                         onChange={handleInputChange}
                       >
                         <option value="">Select...</option>
-
                         <option value="FCL">FCL</option>
                         <option value="LCL">LCL</option>
                       </select>
                     </div>
-                    {/* <div className="col-lg-12 mt-3">
-                      <h5 className="labelTitle">Add Attachment</h5>
-                      <input
-                        type="file"
-                        name="documentt"
-                        className="mb-4"
-                        onChange={handleInputChangfilee}
-                      />
-                    </div> */}
-
-                    <div className="row">
+                                      <div className="row">
                       <div className="col-6 mt-3">
                         <h5>licenses</h5>
                         <input
@@ -2431,7 +2374,7 @@ export default function Managefreight() {
             top: "50%",
             left: "50%",
             transform: "translate(-50%, -50%)",
-           width: { xs: "90%", sm: 600, md: 750 }, 
+            width: { xs: "90%", sm: 600, md: 750 },
             bgcolor: "background.paper",
             boxShadow: 24,
             borderRadius: "5px",
@@ -2534,7 +2477,6 @@ export default function Managefreight() {
           </div>
         </Box>
       </Modal>
-
       <ToastContainer />
       <FooterWeb />
     </div>

@@ -50,15 +50,12 @@ export default function UpdateProfile() {
                 toast.error(error.response.data.msg);
             });
     };
-
     useEffect(() => {
         fetchData();
     }, []);
-
     const handleUpdate = () => {
         handlevalidate(userData)
     }
-
     const handlevalidate = (value) => {
         let error = {}
         if (!value.email) {
@@ -90,6 +87,7 @@ export default function UpdateProfile() {
         formData.append('telephone', userData.telephone);
         formData.append('contact_person', userData.contact_person);
         formData.append('cellphone', userData.cellphone);
+        formData.append('country_code', userData.country_code);
         formData.append('country', userData.country);
         formData.append('province', userData.province);
         formData.append('client_name', userData.full_name);
@@ -212,14 +210,51 @@ export default function UpdateProfile() {
                                         </div>
                                     </div>
                                     <div className="row">
-                                        <div className="col">
+                                           <div className="col d-flex">
+                                           <div className="col-2">
+                                            <label>Code</label>
+                                            {/* <input type="text" name='country' value={userData?.country} onChange={handleChange} className="form-control" /> */}
+                                            <select id="country"  onChange={handleChange} className="form-control" name="country_code" >
+                                                <option>Select...</option>
+                                                {
+                                                    country && country.length > 0 && country.map((item, index) => {
+                                                        return (<>
+
+                                                            <option key={index} value={item.id}>{item.phonecode}</option>
+                                                        </>)
+                                                    })
+                                                }
+                                            </select>
+                                        </div>
+                                        <div className="col-10">
                                             <label htmlFor="">Cellphone <span className='redStar'>*</span></label>
                                             <input type="text" name='cellphone' value={userData?.cellphone} onKeyPress={handlekeypreaa} maxLength={13} onChange={handleChange} className="form-control" />
                                         </div>
+                                           </div>
                                         <div className="col">
+                                              <div className="col d-flex">
+                                           <div className="col-2">
+                                            <label>Code</label>
+                                            {/* <input type="text" name='country' value={userData?.country} onChange={handleChange} className="form-control" /> */}
+                                            <select id="country"  onChange={handleChange} className="form-control" name="country_code" >
+                                                <option>Select...</option>
+                                                {
+                                                    country && country.length > 0 && country.map((item, index) => {
+                                                        return (<>
+
+                                                            <option key={index} value={item.id}>{item.phonecode}</option>
+                                                        </>)
+                                                    })
+                                                }
+                                            </select>
+                                        </div>
+                                        <div className='col-10'>
                                             <label htmlFor="">Telephone <span className='redStar'>*</span></label>
                                             <input type="text" name='telephone' value={userData?.telephone} onKeyPress={handlekeypreaa} maxLength={13} onChange={handleChange} className="form-control" />
                                         </div>
+                                        </div>
+                                        </div>
+                                  
                                     </div>
                                     <div className="row mb-3">
                                         <div className="col">

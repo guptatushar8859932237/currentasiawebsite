@@ -6,9 +6,7 @@ import Autocomplete from "@mui/material/Autocomplete";
 import TextField from "@mui/material/TextField";
 import CloseIcon from "@mui/icons-material/Close";
 import {
-  Button,
   FormControl,
-  InputLabel,
   MenuItem,
   Modal,
   Select,
@@ -22,10 +20,7 @@ export default function AddFreight() {
   const [clientdata, setClientdata] = useState([]);
   const [showRailOptions, setShowRailOptions] = useState(false);
   const [country, setCountry] = useState([]);
-  const [formData5, setFormData5] = useState(null);
-  const [formData1, setFormData1] = useState(null);
   const [formData2, setFormData2] = useState(null);
-  const [formData3, setFormData3] = useState(null);
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     freightOption: "",
@@ -63,10 +58,8 @@ export default function AddFreight() {
     assign_to_clearing: "",
     fcl_lcl: "",
   });
-
   const [show1, setShow1] = useState(false);
   const [selectedDocs, setSelectedDocs] = useState([]);
-
   const docOptions = [
     { id: "Customs Documents", label: "Customs docs" },
     { id: "Supporting Documents", label: "Supporting docs" },
@@ -78,41 +71,30 @@ export default function AddFreight() {
     { id: "AD_Quotations", label: "Attach Quote" },
     { id: "Supplier Invoices", label: "Supplier Invoices" },
   ];
-
   const handleShow = () => setShow1(true);
   const handleClose = () => setShow1(false);
-
-  // Handle dropdown change
   const handleSelect = (e) => {
     const selected = e.target.value;
     if (selected && !selectedDocs.find((doc) => doc.name === selected)) {
       setSelectedDocs([...selectedDocs, { name: selected, files: [] }]);
     }
   };
-
-  // Handle file upload for each document type
   const handleFileChangefil = (e, docName) => {
     const files = Array.from(e.target.files);
     setSelectedDocs((prev) =>
       prev.map((doc) => (doc.name === docName ? { ...doc, files } : doc))
     );
   };
-
-  // For saving data (you can send to API)
   const handleSave = () => {
     console.log("Uploaded Documents:", selectedDocs);
-
-    // To see filenames instead of [object Object]
     selectedDocs.forEach((doc) => {
       console.log("Doc Type:", doc);
       doc.files.forEach((file) => {
         console.log("File:", file.name, "| Size:", file.size, "bytes");
       });
     });
-
     handleClose();
   };
-
   useEffect(() => {
     getdataap();
   }, []);
@@ -152,10 +134,6 @@ export default function AddFreight() {
     const { name, value } = event.target;
     setFormData({ ...formData, [name]: value });
   };
-  const handleFileChange = (event) => {
-    const files = event.target.files;
-    setFormData({ ...formData, attachments: files });
-  };
   const handleclicksubmit = () => {
     handlevalidfate(formData);
   };
@@ -188,7 +166,7 @@ export default function AddFreight() {
     }
   };
   const totalcalc =
-    parseInt(formData.totalDimension) * parseInt(formData.totalWeight);
+    167 * parseInt(formData.totalWeight);
   const apihit = () => {
     const data = new FormData();
     data.append("client_id", JSON.parse(localStorage.getItem("data"))?.id);
@@ -232,33 +210,16 @@ export default function AddFreight() {
     data.append("documentName", formData.documentName);
     selectedDocs.forEach((doc) => {
       console.log("Doc Type:", doc.name);
-
       doc.files.forEach((file) => {
-        data.append(doc.name, file); // 👈 each file append
+        data.append(doc.name, file); 
         console.log("File:", file.name, "| Size:", file.size, "bytes");
       });
     });
-    console.log(data);
-    // if (formData5) {
-    //   for (let i = 0; i < formData5.supplier_invoice.length; i++) {
-    //     data.append("supplier_invoice", formData5.supplier_invoice[i]);
-    //   }
-    // }
-    // if (formData1) {
-    //   for (let i = 0; i < formData1.packing_list.length; i++) {
-    //     data.append("packing_list", formData1.packing_list[i]);
-    //   }
-    // }
     if (formData2) {
       for (let i = 0; i < formData2.licenses.length; i++) {
         data.append("document", formData2.licenses[i]);
       }
     }
-    // if (formData3) {
-    //   for (let i = 0; i < formData3.other_documents.length; i++) {
-    //     data.append("other_documents", formData3.other_documents[i]);
-    //   }
-    // }
     axios
       .post(`${process.env.REACT_APP_BASE_URL}freight-add`, data)
       .then((response) => {
@@ -298,23 +259,6 @@ export default function AddFreight() {
   const formattedDate = `${today.getFullYear()}-${String(
     today.getMonth() + 1
   ).padStart(2, "0")}-${String(today.getDate()).padStart(2, "0")}`;
-
-  const handleFileChange4 = (event) => {
-    const files = event.target.files;
-    setFormData5({ ...formData5, supplier_invoice: files });
-  };
-  const handleFileChange1 = (event) => {
-    const files = event.target.files;
-    setFormData1({ ...formData1, packing_list: files });
-  };
-  const handleFileChange2 = (event) => {
-    const files = event.target.files;
-    setFormData2({ ...formData2, licenses: files });
-  };
-  const handleFileChange3 = (event) => {
-    const files = event.target.files;
-    setFormData3({ ...formData3, other_documents: files });
-  };
   return (
     <>
       <section class="sec_freight">
@@ -705,24 +649,6 @@ export default function AddFreight() {
                   <div className="col-lg-6">
                     <div className="col-lg-12 mainTool autoComplete">
                       <h5>Collection from</h5>
-                      {/* <select
-                        name="collectionFrom"
-                        onChange={handleInputChange}
-                      >
-                        <option>Select...</option>
-                        {country &&
-                          country.length > 0 &&
-                          country.map((item, index) => {
-                            console.log(item);
-                            return (
-                              <>
-                                <option key={index} value={item.id}>
-                                  {item.name}
-                                </option>
-                              </>
-                            );
-                          })}
-                      </select> */}
                       <Autocomplete
                         options={country || []}
                         getOptionLabel={(option) => option.name || ""}
@@ -730,7 +656,7 @@ export default function AddFreight() {
                           handleInputChange({
                             target: {
                               name: "collectionFrom",
-                              value: value?.id || "", // send the id
+                              value: value?.id || "", 
                             },
                           });
                         }}
@@ -778,7 +704,6 @@ export default function AddFreight() {
                         </p>
                       </div>
                     </div>
-
                     <div className="col-12 mainTool mb-3">
                       <h5>Incoterm</h5>
                       <select name="incoterm" onChange={handleInputChange}>
@@ -804,16 +729,6 @@ export default function AddFreight() {
                   <div className="col-lg-6 ">
                     <div className="mainTool autoComplete">
                       <h5>Delivery To</h5>
-                      {/* <select name="country" onChange={handleInputChange}>
-                        <option>Select...</option>
-                        {country &&
-                          country.length > 0 &&
-                          country.map((item, index) => (
-                            <option key={index} value={item.id}>
-                              {item.name}
-                            </option>
-                          ))}
-                      </select> */}
                       <Autocomplete
                         options={country || []}
                         getOptionLabel={(option) => option.name || ""}
@@ -871,7 +786,6 @@ export default function AddFreight() {
                   </div>
                 </div>
               </div>
-
               <div className="borderShip">
                 <h3 className="mb-4">Cargo details</h3>
                 <div className="row">
@@ -894,33 +808,14 @@ export default function AddFreight() {
                   </div>
                   <div className="col-lg-6 mb-3 mainTool autoComplete">
                     <h5>Commodity</h5>
-                    {/* <select
-                      name="commodity"
-                      onChange={handleInputChange}
-                      placeholder="commodity"
-                    >
-                      <option>Select...</option>
-                      {apidata &&
-                        apidata.length > 0 &&
-                        apidata.map((item, index) => {
-                          console.log(item);
-                          return (
-                            <>
-                              <option key={index} value={item.id}>
-                                {item.name}
-                              </option>
-                            </>
-                          );
-                        })}
-                    </select> */}
                     <Autocomplete
-                      options={apidata || []} // ensures it’s always an array
-                      getOptionLabel={(option) => option.name || ""} // display the name
+                      options={apidata || []} 
+                      getOptionLabel={(option) => option.name || ""} 
                       onChange={(event, value) => {
                         handleInputChange({
                           target: {
                             name: "commodity",
-                            value: value ? value.id : "", // value is the id
+                            value: value ? value.id : "", 
                           },
                         });
                       }}
@@ -1003,7 +898,6 @@ export default function AddFreight() {
                       <select
                         className="form-select"
                         name="dimension_unit"
-                        // value={dimension_unit || ""}
                         onChange={handleInputChange}
                       >
                         <option value="">Unit</option>
@@ -1013,7 +907,6 @@ export default function AddFreight() {
                         <option value="ft³">ft³</option>
                       </select>
                     </div>
-
                     <div className="toolSpace">
                       <p className="toolText">
                         Enter the overall dimensions (L x W x H) of all packages
@@ -1034,7 +927,6 @@ export default function AddFreight() {
                       <select
                         className="form-select"
                         name="weight_unit"
-                        // value={weight_unit || ""}
                         onChange={handleInputChange}
                       >
                         <option value="">Unit</option>
@@ -1051,10 +943,11 @@ export default function AddFreight() {
                     </div>
                   </div>
                   <div className="col-lg-6 mt-3 mainTool">
-                    <h5>Auto Calculate</h5>
+                    <h5>Volumetric Weight</h5>
                     <input
                       type="text"
                       value={totalcalc.toFixed(2)}
+                      disabled
                       name="autoCalculate"
                       onChange={handleInputChange}
                     />
@@ -1083,108 +976,6 @@ export default function AddFreight() {
                       </p>
                     </div>
                   </div>
-
-                  {/* <div className="col-6 mt-3 mainTool">
-                    <h5>Add attachments</h5>
-                    <input
-                      type="file"
-                      name="supplier_invoice"
-                      className="w-100 rounded"
-                      onChange={handleFileChange4}
-                      multiple
-                    />
-                    <div className="toolSpace">
-                      <p className="toolText">Upload supporting cargo files.</p>
-                    </div>
-                  </div>
-                  {/* add 27Aug */}
-                  {/* <div className="col-6 mt-3 mainTool">
-                    <h5>Packing List</h5>
-                    <input
-                      type="file"
-                      name="packing_list"
-                      className="w-100 rounded"
-                      onChange={handleFileChange1}
-                      multiple
-                    />
-                     <div className="toolSpace">
-                      <p className="toolText"> Choose and upload the Packing List file (PDF, DOC, or image) for this cargo.</p>
-                    </div>
-                   
-                  </div> */}
-                  {/* 
-                  <div className="col-6 mt-3 mainTool">
-                    <h5>Add Document</h5>
-                    <input
-                      type="file"
-                      name="licenses"
-                      className="w-100 rounded"
-                      onChange={handleFileChange2}
-                      multiple
-                    />
-                    <div className="toolSpace">
-                      <p className="toolText">
-                        Upload valid license documents required for this
-                        shipment or cargo.
-                      </p>
-                    </div>
-                  </div> */}
-                  {/* <div className="col-6 mt-3 mainTool">
-                    <h5>Other Documents</h5>
-                    <input
-                      type="file"
-                      name="other_documents"
-                      className="w-100 rounded"
-                      onChange={handleFileChange3}
-                      multiple
-                    />
-                    <div className="toolSpace">
-                      <p className="toolText"> Upload any additional documents related to this cargo shipment.</p>
-                    </div>
-                   
-                  </div> */}
-                  {/* <div className="col-lg-6 mt-3 mainTool">
-                    {/* <h5>Document Name</h5>
-                    <select name="attachmentType">
-                      <option value="">Select Doc...</option>
-                      <option value="supplierInvoice">
-                        Supplier Invoice / Quotation / Proforma Invoice
-                      </option>
-                      <option value="packingList">Packing List</option>
-                      <option value="licenses">Licenses/Permits</option>
-                      <option value="otherDocuments">Other documents</option> */}
-                  {/* </select> */}
-                  {/* <label htmlFor="clearing_agent" className="form-label">
-                      Select Document
-                    </label>
-                    <select name="documentName" onChange={handleInputChange}>
-                      <option value="">Select...</option>
-                      <option value="Customs Documents">Customs docs</option>
-                      <option value="Supporting Documents">
-                        Supporting docs
-                      </option>
-                      <option value="Invoice, Packing List">
-                        Invoice / Packing L
-                      </option>
-                      <option value="Product Literature">
-                        Product Literature
-                      </option>
-                      <option value="Letters of authority">LOA</option>
-                      <option value="Waybills">Freight Docs</option>
-                      <option value="Waybills">Shipping instruction</option>
-                      <option value="Supplier Invoices">
-                        Freight Invoices{" "}
-                      </option>
-                      <option value="AD_Quotations">Attach Quote</option>
-                    </select>
-                    <div className="toolSpace">
-                      <p className="toolText">
-                        {" "}
-                        Select the type of document you want to upload for this
-                        shipment
-                      </p>
-                    </div>
-                  </div> */}
                   <div className="col-lg-6 mt-3 mainTool">
                     <h5>Comment</h5>
                     <input type="text" name="comment" placeholder="comment" />
@@ -1196,7 +987,6 @@ export default function AddFreight() {
                       </p>
                     </div>
                   </div>
-                  {/* add 27Aug */}
                   <div className="text-center mt-3">
                     <button
                       type="submit"
@@ -1222,20 +1012,12 @@ export default function AddFreight() {
                   Show Previous Booking
                 </button>
               </div>
-              {/* <div className="contractSec " style={{marginBottom:"25px"}}>
-                {/* <p>
-                  <i className="fi fi-rr-exclamation"></i> Lorem ipsum dolor sit
-                  amet consectetur adipisicing elit. Commodi vitae, rerum et,
-                  adipisci quos, minus ea quis impedit corporis harum debitis.
-                </p>  
-              </div> */}
               <div className="borderShip updateLoading mt-0">
                 <div className="row">
                   <div className="col-md-12">
                     <div className="row align-items-center">
                       <div className="col-md-6">
                         <h5>Insurance</h5>
-
                         <div className="shipRefer d-flex align-items-center">
                           <input
                             type="radio"
@@ -1362,7 +1144,6 @@ export default function AddFreight() {
                           boxShadow: 24, // nice shadow effect
                         }}
                       >
-                        {/* Title */}
                         <div className="customHeader d-flex justify-content-between">
                           <h5>Upload Documents</h5>
                           <div className="crossBtn">
@@ -1379,7 +1160,6 @@ export default function AddFreight() {
                           </div>
                         </div>
                         <div style={{ padding: "16px" }}>
-                          {/* Dropdown */}
                           <h5>Select Document Type</h5>
                           <FormControl fullWidth>
                             <Select
@@ -1394,8 +1174,6 @@ export default function AddFreight() {
                               ))}
                             </Select>
                           </FormControl>
-
-                          {/* Dynamic file inputs */}
                           <div className="mt-3">
                             {selectedDocs.map((doc, index) => (
                               <div
@@ -1427,8 +1205,6 @@ export default function AddFreight() {
                             </button>
                           </div>
                         </div>
-
-                        {/* Footer buttons */}
                       </Box>
                     </Modal>
                   )}
@@ -1459,32 +1235,6 @@ export default function AddFreight() {
                   <p>Spot rate is not applicable for our contract customers</p>
                 </ul>
               </div>
-
-              {/* <div className="checkOffers">
-                <h5>Check Asia Direct offers for your next vessel</h5>
-                <h6>
-                  Please enter your location and container details to see the
-                  offers.
-                </h6>
-                <ul>
-                  <li>
-                    <i className="fi fi-rs-usd-circle"></i>{" "}
-                    <span>Fixed price at booking</span>{" "}
-                  </li>
-                  <li>
-                    {" "}
-                    <i className="fi fi-rr-loading"></i>{" "}
-                    <span>Loading Guarantee</span>{" "}
-                  </li>
-                  <li>
-                    <i className="fi fi-rr-shuffle"></i>
-                    <span>
-                      Changes and cancellations Possible for a fee
-                    </span>{" "}
-                  </li>
-                  <p>Spot rate is not applicable for our contract customers</p>
-                </ul>
-              </div> */}
             </div>
           </div>
         </div>

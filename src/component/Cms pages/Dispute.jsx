@@ -372,7 +372,7 @@ export default function Dispute() {
               {/* ---------- Header Section ---------- */}
               <div className="div1 mb-4 d-flex justify-content-between align-items-center">
                 <h2 className="heading_1">
-                  {showForm ? "Get in Touch" : "View Dispute"}
+                  {showForm ? "Get in Touch With Asia Direct Communication" : "View Dispute"}
                 </h2>
                 <button className="btn btn_add_web" onClick={toggleView}>
                   {showForm ? "View Dispute" : "Add Dispute"}

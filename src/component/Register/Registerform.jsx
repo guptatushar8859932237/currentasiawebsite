@@ -1133,7 +1133,23 @@ function RegisterForm() {
                           {error.contact_person}
                         </small>
                       </div>
-                      <div className="col-md-6">
+                      <div className="col-md-6 d-flex">
+                        <div className="col-3">
+                        <label className="form-label">Code<span className="text-danger">*</span></label>
+                        <select
+                          name="country_code"
+                          className="form-select"
+                          onChange={handleChange}
+                        >
+                          <option value="">Select...</option>
+                          {country.map((c, idx) => (
+                            <option key={idx} value={c.id}>
+                              +{c.phonecode}
+                            </option>
+                          ))}
+                        </select>
+                      </div>
+                        <div className="col-9 ">
                         <label className="form-label">Cellphone<span className="text-danger">*</span></label>
                         <input
                           type="tel"
@@ -1143,9 +1159,25 @@ function RegisterForm() {
                           onKeyPress={handleKeyPress}
                           onChange={handleChange}
                         />
-                        <small className="text-danger">{error.cellphone}</small>
+                        </div>
                       </div>
-                      <div className="col-md-6">
+                      <div className="col-md-6 d-flex">
+                          <div className="col-3">
+                        <label className="form-label">Code<span className="text-danger">*</span></label>
+                        <select
+                          name="country_code"
+                          className="form-select"
+                          onChange={handleChange}
+                        >
+                          <option value="">Select...</option>
+                          {country.map((c, idx) => (
+                            <option key={idx} value={c.id}>
+                              +{c.phonecode}
+                            </option>
+                          ))}
+                        </select>
+                      </div>
+                      <div className="col-9">
                         <label className="form-label">Telephone</label>
                         <input
                           type="tel"
@@ -1155,6 +1187,7 @@ function RegisterForm() {
                           onKeyPress={handleKeyPress}
                           onChange={handleChange}
                         />
+                      </div>
                       </div>
                       <div className="col-md-6">
                         <label className="form-label">Email<span className="text-danger">*</span></label>

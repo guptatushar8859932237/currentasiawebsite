@@ -178,7 +178,7 @@ export default function Contactus() {
               <div class="row justify-content-center mt-5 align-items-center">
                 <div class="col-md-9">
                   <div class="div1">
-                    <h2 class="heading_1">Get in touch</h2>
+                    <h2 class="heading_1">Get in touch with Asia Direct – Communications</h2>
                   </div>
                   <form method="post">
                     <div class="row">

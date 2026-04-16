@@ -57,7 +57,7 @@ import Waybill from './component/order/Waybill';
 import Contactus from './component/homepage/Contactus';
 import Practice from './component/Practice';
 import Disputepage from './Disputepage';
- 
+import ChatPage from './component/Chat/ChatPage';
  
 function App() {
   console.log("2-9")
@@ -85,6 +85,7 @@ function App() {
           <Route path='/My-profile' element={<Profile />} />
           <Route path='/animation' element={<Animation />} />
           <Route path='/dispute' element={<Dispute />} />
+          <Route path='/QuotationInFreight' element={<ChatPage />} />
           <Route path='/Download-pdf' element={<Downloadpdf />} />
           <Route path='/update-profile' element={<Updateprofile />} />
           <Route path='/clearence-details' element={<Customdetails />} />
@@ -123,6 +124,7 @@ function App() {
         </Routes>
       </BrowserRouter>
       </MyContext.Provider>
+      
     </>
   );
 }

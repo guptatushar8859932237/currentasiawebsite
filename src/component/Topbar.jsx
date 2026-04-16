@@ -239,6 +239,14 @@ export default function Topbar() {
                             Change Password
                           </Link>
                         </li>
+                        <li>
+                          <Link
+                            className="dropdown-item list_item"
+                            to={"/QuotationInFreight"}
+                          >
+                            Chatting
+                          </Link>
+                        </li>
                         {/* <li><Link className="dropdown-item list_item drop_item1" onClick={handleclicklogout}>Logout</Link></li> */}
                         <li>
                           <span
