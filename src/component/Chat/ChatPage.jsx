@@ -36,7 +36,7 @@ export default function QuotationInFreight() {
 
   useEffect(() => {
     console.log("🚀 Initializing Socket...");
-    socketRef.current = io(process.env.REACT_APP_BASE_URL);
+    socketRef.current = io(process.env.REACT_APP_BASE_URLSOCKET);
     socketRef.current.on("connect", () => {
       console.log("✅ SOCKET CONNECTED:", socketRef.current.id);
        if (inbox.length > 0) {
